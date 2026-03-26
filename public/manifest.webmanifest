@@ -1,0 +1,16 @@
+{
+  "name": "GIRLCARE",
+  "short_name": "GIRLCARE",
+  "description": "Offline-first support platform for young women in rural communities.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F9F9FB",
+  "theme_color": "#6C63FF",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "48x46",
+      "type": "image/svg+xml"
+    }
+  ]
+}
