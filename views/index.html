@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GirlsCare – Empowering Young Women</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">💜</span> GirlsCare
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#qa" class="nav-link">Ask Anonymously</a>
+        <a href="#professionals" class="nav-link">Health Professionals</a>
+        <a href="#resources" class="nav-link">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-content">
+        <h1 class="hero-title">Knowledge. Confidence. Support.</h1>
+        <p class="hero-subtitle">
+          GirlsCare empowers young women with accessible health education, anonymous Q&amp;A, and
+          connections to real health professionals — anytime, anywhere.
+        </p>
+        <div class="hero-actions">
+          <a href="#education" class="btn btn-primary">Start Learning</a>
+          <a href="#qa" class="btn btn-outline">Ask a Question</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features summary -->
+    <section class="features container" aria-label="Features">
+      <div class="feature-card">
+        <span class="feature-icon">📚</span>
+        <h3>Accessible Education</h3>
+        <p>Free, expert-reviewed articles and guides available anytime on topics that matter to you.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3>Ask Anonymously</h3>
+        <p>Submit any question without sharing your name. No judgment, complete privacy.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🩺</span>
+        <h3>Real Professionals</h3>
+        <p>Connect with qualified doctors, nurses, and counsellors who understand your needs.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🧭</span>
+        <h3>Informed Decisions</h3>
+        <p>Tools and resources to help you make confident, informed choices about your health.</p>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section bg-light">
+      <div class="container">
+        <h2 class="section-title">📚 Education Hub</h2>
+        <p class="section-subtitle">Explore health topics written for and about young women.</p>
+        <div id="topics-grid" class="topics-grid">
+          <p class="loading">Loading topics…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Anonymous Q&A Section -->
+    <section id="qa" class="section">
+      <div class="container">
+        <h2 class="section-title">🔒 Ask Anonymously</h2>
+        <p class="section-subtitle">
+          Your question is submitted without any personal information. Ask freely.
+        </p>
+        <div class="qa-layout">
+          <form id="qa-form" class="qa-form card" novalidate>
+            <h3>Submit a Question</h3>
+            <div class="form-group">
+              <label for="qa-category">Category</label>
+              <select id="qa-category" name="category">
+                <option value="General">General</option>
+                <option value="Menstrual Health">Menstrual Health</option>
+                <option value="Mental Health">Mental Health</option>
+                <option value="Nutrition">Nutrition</option>
+                <option value="Reproductive Health">Reproductive Health</option>
+                <option value="Safety &amp; Rights">Safety &amp; Rights</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="qa-question">Your Question <span class="required">*</span></label>
+              <textarea id="qa-question" name="question" rows="4" placeholder="Type your question here…" required></textarea>
+              <p id="qa-error" class="field-error" hidden>Please enter a question.</p>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Anonymously</button>
+            <p id="qa-success" class="success-msg" hidden>✅ Question submitted! A professional will answer soon.</p>
+          </form>
+
+          <div class="qa-list">
+            <h3>Recent Q&amp;As</h3>
+            <div id="questions-list">
+              <p class="loading">Loading questions…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Health Professionals Section -->
+    <section id="professionals" class="section bg-light">
+      <div class="container">
+        <h2 class="section-title">🩺 Health Professionals</h2>
+        <p class="section-subtitle">Connect with qualified professionals who care.</p>
+        <div class="filter-bar">
+          <label for="specialty-filter">Filter by specialty:</label>
+          <select id="specialty-filter">
+            <option value="">All Specialties</option>
+            <option value="Gynaecology">Gynaecology</option>
+            <option value="Mental Health">Mental Health</option>
+            <option value="General Health">General Health</option>
+            <option value="Nutrition">Nutrition</option>
+          </select>
+        </div>
+        <div id="professionals-grid" class="professionals-grid">
+          <p class="loading">Loading professionals…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources / Decision-Making Section -->
+    <section id="resources" class="section">
+      <div class="container">
+        <h2 class="section-title">🧭 Decision-Making Resources</h2>
+        <p class="section-subtitle">Tools, guides, and articles to help you make informed choices.</p>
+        <div id="resources-grid" class="resources-grid">
+          <p class="loading">Loading resources…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>💜 GirlsCare &mdash; Empowering young women with knowledge, confidence, and support.</p>
+      <p class="footer-note">This platform does not replace professional medical advice. Always consult a qualified health professional.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
