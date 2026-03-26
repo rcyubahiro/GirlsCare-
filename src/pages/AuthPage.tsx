@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import InputField from '../components/InputField';
+import { validateEmail, validatePassword } from '../utils/validation';
 
 interface AuthPageProps {
   onLogin: (email: string) => void;
@@ -18,8 +19,8 @@ export default function AuthPage({ onLogin }: AuthPageProps) {
 
   const errors = useMemo(
     () => ({
-      email: attempted && !email.trim() ? 'Email is required.' : '',
-      password: attempted && !password.trim() ? 'Password is required.' : '',
+      email: attempted ? (validateEmail(email) || undefined) : undefined,
+      password: attempted ? (validatePassword(password) || undefined) : undefined,
     }),
     [attempted, email, password],
   );

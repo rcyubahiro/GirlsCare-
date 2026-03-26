@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import ToastContainer, { type Toast } from './components/ToastContainer';
 import { syncQueuedQuestions } from './api/syncService';
 import { createLocalQuestion, fetchQuestions, submitQuestionOnline } from './api/questionService';
 import AuthPage from './pages/AuthPage';
@@ -17,6 +18,9 @@ import ProfilePage from './pages/ProfilePage';
 import type { Question, UserSession } from './types';
 import { enqueueQuestion, loadQuestions, loadSession, saveQuestions, saveSession } from './utils/storage';
 
+// Global toast context for cross-page notifications
+export { default as ToastContext } from './components/ToastContainer';
+
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = window.localStorage.getItem('girlcare-theme');
@@ -28,6 +32,16 @@ function App() {
   });
   const [session, setSession] = useState<UserSession | null>(() => loadSession());
   const [questions, setQuestions] = useState<Question[]>(() => loadQuestions());
+  const [toasts, setToasts] = useState<Toast[]>([]);
+
+  const addToast = useCallback((message: string, type: 'success' | 'error' | 'info' | 'warning' = 'info') => {
+    const id = `toast-${Date.now()}`;
+    setToasts((prev) => [...prev, { id, message, type }]);
+  }, []);
+
+  const removeToast = useCallback((id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   useEffect(() => {
     const rootElement = document.documentElement;
@@ -139,6 +153,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       <Layout
         isLoggedIn={Boolean(session)}
         theme={theme}
@@ -170,7 +185,7 @@ function App() {
             path="/ask"
             element={
               <ProtectedRoute isLoggedIn={Boolean(session)}>
-                <AskQuestionPage onSubmitQuestion={handleSubmitQuestion} />
+                <AskQuestionPage onSubmitQuestion={handleSubmitQuestion} onNotify={addToast} />
               </ProtectedRoute>
             }
           />
