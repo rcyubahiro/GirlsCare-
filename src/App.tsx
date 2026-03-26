@@ -18,8 +18,23 @@ import type { Question, UserSession } from './types';
 import { enqueueQuestion, loadQuestions, loadSession, saveQuestions, saveSession } from './utils/storage';
 
 function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const savedTheme = window.localStorage.getItem('girlcare-theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      return savedTheme;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
   const [session, setSession] = useState<UserSession | null>(() => loadSession());
   const [questions, setQuestions] = useState<Question[]>(() => loadQuestions());
+
+  useEffect(() => {
+    const rootElement = document.documentElement;
+    rootElement.classList.toggle('dark', theme === 'dark');
+    rootElement.setAttribute('data-theme', theme);
+    window.localStorage.setItem('girlcare-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const syncNow = () => {
@@ -124,7 +139,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Layout isLoggedIn={Boolean(session)}>
+      <Layout
+        isLoggedIn={Boolean(session)}
+        theme={theme}
+        onToggleTheme={() => setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'))}
+      >
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route

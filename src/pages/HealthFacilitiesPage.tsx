@@ -26,25 +26,33 @@ export default function HealthFacilitiesPage() {
   }, []);
 
   return (
-    <div className="space-y-4 animate-fadeInUp">
-      <h1 className="font-heading text-2xl font-semibold text-textBase">Health Facilities</h1>
-      <p className="text-sm text-slate-600">Reach trusted centers for support and reproductive health services.</p>
+    <div className="space-y-4 pb-20 animate-fadeInUp">
+      <div>
+        <h1 className="font-heading text-2xl font-bold text-textBase dark:text-slate-100">Health Facilities</h1>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Reach trusted centers for support and reproductive health services.</p>
+      </div>
 
       {loading ? (
         <Card>
-          <p className="text-sm text-slate-600">Loading facilities...</p>
+          <div className="flex items-center gap-2">
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+            <p className="text-sm text-slate-600 dark:text-slate-300">Loading facilities...</p>
+          </div>
         </Card>
       ) : null}
 
-      <div className="grid gap-3">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {facilities.map((facility) => (
           <Card key={facility.id}>
-            <h2 className="font-heading text-lg font-semibold text-textBase">{facility.name}</h2>
-            <p className="mt-1 text-sm text-slate-600">{facility.location}</p>
-            <p className="mt-2 inline-flex items-center gap-1 text-sm text-primary">
+            <h2 className="font-heading text-lg font-bold text-textBase dark:text-slate-100">{facility.name}</h2>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{facility.location}</p>
+            <a
+              href={`tel:${facility.contact}`}
+              className="mt-3 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-secondary to-[#f9a13a] px-3 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-soft dark:shadow-secondary/20"
+            >
               <PhoneIcon className="h-4 w-4" />
               {facility.contact}
-            </p>
+            </a>
           </Card>
         ))}
       </div>

@@ -9,23 +9,29 @@ interface ProfilePageProps {
 
 export default function ProfilePage({ user, onLogout }: ProfilePageProps) {
   return (
-    <div className="mx-auto max-w-lg animate-fadeInUp">
+    <div className="mx-auto max-w-lg animate-fadeInUp pb-20">
       <Card>
-        <h1 className="font-heading text-2xl font-semibold text-textBase">My Profile</h1>
-        <div className="mt-4 space-y-2 text-sm text-slate-700">
-          <p>
-            <span className="font-medium">Email:</span> {user.email}
-          </p>
-          <p>
-            <span className="font-medium">Name:</span> {user.name}
-          </p>
-          <p>
-            <span className="font-medium">Logged in:</span>{' '}
-            {new Date(user.loggedInAt).toLocaleString()}
-          </p>
+        <h1 className="font-heading text-2xl font-bold text-textBase dark:text-slate-100">My Profile</h1>
+        <div className="mt-5 space-y-3 rounded-2xl border border-slate-200/50 bg-slate-50 p-4 dark:border-slate-700/50 dark:bg-slate-800/50">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Email</span>
+            <p className="text-sm font-semibold text-textBase dark:text-slate-100">{user.email}</p>
+          </div>
+          <div className="border-t border-slate-200 dark:border-slate-700" />
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Name</span>
+            <p className="text-sm font-semibold text-textBase dark:text-slate-100">{user.name}</p>
+          </div>
+          <div className="border-t border-slate-200 dark:border-slate-700" />
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Member Since</span>
+            <p className="text-sm font-semibold text-textBase dark:text-slate-100">
+              {new Date(user.loggedInAt).toLocaleDateString()}
+            </p>
+          </div>
         </div>
 
-        <Button className="mt-6" variant="secondary" onClick={onLogout}>
+        <Button className="mt-6 w-full" variant="secondary" onClick={onLogout}>
           Logout
         </Button>
       </Card>

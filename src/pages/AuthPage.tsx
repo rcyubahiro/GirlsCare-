@@ -41,11 +41,13 @@ export default function AuthPage({ onLogin }: AuthPageProps) {
 
   return (
     <div className="mx-auto max-w-md animate-fadeInUp">
-      <Card>
-        <h1 className="font-heading text-2xl font-semibold text-textBase">
+      <Card className="relative overflow-hidden">
+        <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/15 blur-2xl" />
+        <div className="relative">
+        <h1 className="font-heading text-2xl font-bold text-textBase">
           {mode === 'login' ? 'Welcome Back' : 'Create Account'}
         </h1>
-        <p className="mt-1 text-sm text-slate-600">
+        <p className="mt-1 text-sm text-slate-700">
           {mode === 'login' ? 'Login to continue your journey.' : 'Register to access learning and support.'}
         </p>
 
@@ -74,11 +76,12 @@ export default function AuthPage({ onLogin }: AuthPageProps) {
         </div>
 
         <button
-          className="mt-4 text-sm font-medium text-primary underline-offset-2 hover:underline"
+          className="mt-4 text-sm font-bold text-primary underline-offset-2 hover:underline"
           onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
         >
           {mode === 'login' ? 'Need an account? Register' : 'Have an account? Login'}
         </button>
+        </div>
       </Card>
     </div>
   );

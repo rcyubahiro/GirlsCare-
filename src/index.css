@@ -4,9 +4,17 @@
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f9f9fb;
-  color: #333333;
+  font-family: 'Nunito', sans-serif;
+  background-color: #fff9f3;
+  color: #14213d;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+html.dark body {
+  background-color: #020617;
+  color: #e2e8f0;
 }
 
 #root {

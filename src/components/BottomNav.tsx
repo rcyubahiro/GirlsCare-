@@ -13,8 +13,8 @@ export default function BottomNav() {
   const location = useLocation();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-20 border-t border-slate-200 bg-white md:hidden">
-      <ul className="mx-auto flex max-w-5xl justify-around px-2 py-2">
+    <nav className="fixed bottom-3 left-3 right-3 z-20 md:hidden">
+      <ul className="mx-auto flex max-w-md justify-around rounded-2xl border border-white/70 bg-white/85 px-2 py-2 shadow-card backdrop-blur dark:border-slate-700 dark:bg-slate-900/90">
         {items.map((item) => {
           const Icon = item.icon;
           const active = location.pathname === item.to;
@@ -23,8 +23,8 @@ export default function BottomNav() {
               <Link
                 to={item.to}
                 className={[
-                  'flex min-w-14 flex-col items-center rounded-lg px-2 py-1 text-xs',
-                  active ? 'text-primary' : 'text-slate-500',
+                  'flex min-w-14 flex-col items-center rounded-xl px-2 py-1 text-[11px] font-semibold transition',
+                  active ? 'bg-primary/10 text-primary dark:bg-primary/20' : 'text-slate-600 dark:text-slate-300',
                 ].join(' ')}
               >
                 <Icon className="h-5 w-5" />
