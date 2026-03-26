@@ -1,0 +1,16 @@
+# Enforce consistent line endings across the repository.
+* text=auto eol=lf
+
+# Keep Windows script files in CRLF where needed.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Do not modify line endings for binary assets.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.svg text eol=lf
+*.ico binary
