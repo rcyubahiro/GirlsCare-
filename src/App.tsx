@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import RoleBasedRoute from './components/RoleBasedRoute';
 import ToastContainer, { type Toast } from './components/ToastContainer';
 import { syncQueuedQuestions } from './api/syncService';
 import { createLocalQuestion, fetchQuestions, submitQuestionOnline } from './api/questionService';
@@ -15,6 +16,9 @@ import LandingPage from './pages/LandingPage';
 import LifeSkillsPage from './pages/LifeSkillsPage';
 import CampaignsPage from './pages/CampaignsPage';
 import ProfilePage from './pages/ProfilePage';
+import CycleTrackerPage from './pages/CycleTrackerPage';
+import MentorChatPage from './pages/MentorChatPage';
+import AdminHealthPage from './pages/AdminHealthPage';
 import type { Question, UserSession } from './types';
 import { enqueueQuestion, loadQuestions, loadSession, saveQuestions, saveSession } from './utils/storage';
 
@@ -111,11 +115,12 @@ function App() {
     };
   }, [questions.length]);
 
-  const handleLogin = (email: string) => {
+  const handleLogin = (email: string, isAdmin?: boolean) => {
     setSession({
       email,
       name: email.split('@')[0] || 'User',
       loggedInAt: new Date().toISOString(),
+      isAdmin,
     });
   };
 
@@ -227,6 +232,30 @@ function App() {
               <ProtectedRoute isLoggedIn={Boolean(session)}>
                 <ProfilePage user={session as UserSession} onLogout={handleLogout} />
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cycle-tracker"
+            element={
+              <ProtectedRoute isLoggedIn={Boolean(session)}>
+                <CycleTrackerPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mentors"
+            element={
+              <ProtectedRoute isLoggedIn={Boolean(session)}>
+                <MentorChatPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin-health"
+            element={
+              <RoleBasedRoute session={session} requiredRole="admin">
+                <AdminHealthPage />
+              </RoleBasedRoute>
             }
           />
           <Route path="*" element={<Navigate to="/" replace />} />

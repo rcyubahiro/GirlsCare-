@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import Card from '../components/Card';
 import SearchBar from '../components/SearchBar';
 import { searchQuestions } from '../utils/search';
-import type { Question } from '../types';
+import type { MentorResponse, Question } from '../types';
 
 interface AnswersPageProps {
   questions: Question[];
@@ -66,7 +66,7 @@ export default function AnswersPage({ questions }: AnswersPageProps) {
               <p className="mt-2 text-sm font-semibold text-textBase dark:text-slate-100">Q: {question.content}</p>
 
               <div className="mt-3 space-y-2">
-                {question.mentorResponses.map((response: any) => (
+                {question.mentorResponses.map((response: MentorResponse) => (
                   <div key={response.id} className="rounded-2xl border border-primary/20 bg-primary/5 p-3 text-sm text-slate-700 transition hover:bg-primary/10 dark:border-primary/30 dark:bg-primary/10 dark:text-slate-200">
                     <p className="mb-1 text-xs font-semibold text-primary dark:text-primary/80">
                       {response.mentor.name} ({response.mentor.role}) · {response.guidanceType}

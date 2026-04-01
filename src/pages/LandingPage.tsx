@@ -42,6 +42,24 @@ export default function LandingPage() {
             <p className="text-xs text-slate-600">Trusted Care Centers</p>
           </Card>
         </div>
+
+        <Card className="mt-4 animate-fadeInUp border-2 border-blue-300 bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:border-blue-700 dark:from-blue-950 dark:via-slate-800 dark:to-blue-950">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="h-6 w-6 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+              <span className="text-white text-xs font-bold">⚙</span>
+            </div>
+            <p className="font-heading text-sm font-bold text-blue-900 dark:text-blue-300">Admin & Developers</p>
+          </div>
+          <p className="text-xs text-slate-700 dark:text-slate-300">
+            Backend integration tests, health checks, and real-time monitoring for mentor chat and push notifications.
+          </p>
+          <Link to="/login">
+            <Button variant="ghost" className="mt-3 w-full">Access Admin Panel →</Button>
+          </Link>
+          <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">
+            Login with an email containing "admin" to unlock the admin panel.
+          </p>
+        </Card>
       </section>
 
       <Card className="relative animate-fadeInUp overflow-hidden bg-gradient-to-br from-primary/10 via-white to-secondary/15">

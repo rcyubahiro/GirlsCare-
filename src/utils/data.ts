@@ -1,4 +1,4 @@
-import type { CampaignItem, DashboardCardItem, EducationTopic, HealthFacility, LifeSkillTopic } from '../types';
+import type { CampaignItem, DashboardCardItem, EducationTopic, HealthFacility, LifeSkillTopic, Mentor } from '../types';
 
 export const educationTopics: EducationTopic[] = [
   {
@@ -71,6 +71,21 @@ export const dashboardCards: DashboardCardItem[] = [
     description: 'Join local awareness actions on early pregnancy prevention.',
     route: '/campaigns',
   },
+  {
+    title: 'Cycle Tracker',
+    description: 'Track your period, cycle days, and get smart reminders.',
+    route: '/cycle-tracker',
+  },
+  {
+    title: 'Mentor Chat',
+    description: 'Talk anonymously with known mentors for support.',
+    route: '/mentors',
+  },
+  {
+    title: 'Admin Health',
+    description: 'Run backend ping/read/write checks for chat and reminders.',
+    route: '/admin-health',
+  },
 ];
 
 export const lifeSkillTopics: LifeSkillTopic[] = [
@@ -127,6 +142,27 @@ export const campaignItems: CampaignItem[] = [
     message: 'Healthy relationships are built on consent, respect, and open communication.',
     callToAction: 'Discuss consent and boundaries with your peer group.',
     focusArea: 'safe-relationships',
+  },
+];
+
+export const mentors: Mentor[] = [
+  {
+    id: 'mentor-1',
+    name: 'Aline Mukamana',
+    specialty: 'Menstrual Health Educator',
+    availability: 'Online',
+  },
+  {
+    id: 'mentor-2',
+    name: 'Grace Uwase',
+    specialty: 'Youth Counselor',
+    availability: 'Away',
+  },
+  {
+    id: 'mentor-3',
+    name: 'Solange Iradukunda',
+    specialty: 'Nurse Educator',
+    availability: 'Online',
   },
 ];
 

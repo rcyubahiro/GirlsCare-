@@ -69,3 +69,57 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
+
+self.addEventListener('push', (event) => {
+  let payload = { title: 'GirlCare Reminder', body: 'You have a new reminder.' };
+
+  try {
+    if (event.data) {
+      payload = event.data.json();
+    }
+  } catch {
+    // Use fallback payload.
+  }
+
+  event.waitUntil(
+    self.registration.showNotification(payload.title || 'GirlCare Reminder', {
+      body: payload.body || 'You have a new reminder.',
+      icon: '/favicon.svg',
+      badge: '/favicon.svg',
+      tag: 'girlcare-reminder-push',
+    }),
+  );
+});
+
+self.addEventListener('message', (event) => {
+  const data = event.data || {};
+  if (data.type !== 'SHOW_REMINDER') {
+    return;
+  }
+
+  const title = data.title || 'GirlCare Reminder';
+  const body = data.body || 'You have a new reminder.';
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body,
+      icon: '/favicon.svg',
+      badge: '/favicon.svg',
+      tag: 'girlcare-reminder-local',
+    }),
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
+      const existing = clients.find((client) => 'focus' in client);
+      if (existing) {
+        return existing.focus();
+      }
+      return self.clients.openWindow('/cycle-tracker');
+    }),
+  );
+});

@@ -1,8 +1,18 @@
-import type { MentorResponse, ModerationSummary, Question, QueuedQuestion, UserSession } from '../types';
+import type {
+  CycleSettings,
+  MentorChatMessage,
+  MentorResponse,
+  ModerationSummary,
+  Question,
+  QueuedQuestion,
+  UserSession,
+} from '../types';
 
 const SESSION_KEY = 'girlcare-session';
 const QUESTIONS_KEY = 'girlcare-questions';
 const QUEUED_QUESTIONS_KEY = 'girlcare-queued-questions';
+const CYCLE_SETTINGS_KEY = 'girlcare-cycle-settings';
+const MENTOR_MESSAGES_KEY = 'girlcare-mentor-messages';
 
 export function loadSession(): UserSession | null {
   const raw = localStorage.getItem(SESSION_KEY);
@@ -82,6 +92,62 @@ export function enqueueQuestion(question: QueuedQuestion): void {
   const queue = loadQueuedQuestions();
   queue.push(question);
   saveQueuedQuestions(queue);
+}
+
+export function loadCycleSettings(): CycleSettings | null {
+  const raw = localStorage.getItem(CYCLE_SETTINGS_KEY);
+  if (!raw) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(raw) as Partial<CycleSettings>;
+    if (!parsed.lastPeriodStart || !parsed.cycleLength || !parsed.periodLength) {
+      return null;
+    }
+
+    return {
+      lastPeriodStart: parsed.lastPeriodStart,
+      cycleLength: parsed.cycleLength,
+      periodLength: parsed.periodLength,
+      remindersEnabled: Boolean(parsed.remindersEnabled),
+      reminderTime: parsed.reminderTime ?? '19:00',
+    };
+  } catch {
+    return null;
+  }
+}
+
+export function saveCycleSettings(settings: CycleSettings): void {
+  localStorage.setItem(CYCLE_SETTINGS_KEY, JSON.stringify(settings));
+}
+
+export function loadMentorMessages(): MentorChatMessage[] {
+  const raw = localStorage.getItem(MENTOR_MESSAGES_KEY);
+  if (!raw) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(raw) as Array<Partial<MentorChatMessage>>;
+    return parsed
+      .filter((item) => Boolean(item.id && item.mentorId && item.sender && item.content && item.createdAt))
+      .map((item) => ({
+        id: item.id as string,
+        mentorId: item.mentorId as string,
+        sender: item.sender as 'user' | 'mentor',
+        content: item.content as string,
+        createdAt: item.createdAt as string,
+        deliveredAt: item.deliveredAt as string | undefined,
+        readAt: item.readAt as string | undefined,
+      }));
+  } catch {
+    return [];
+  }
+}
+
+export function saveMentorMessages(messages: MentorChatMessage[]): void {
+  localStorage.setItem(MENTOR_MESSAGES_KEY, JSON.stringify(messages));
 }
 
 function normalizeModeration(moderation: Partial<ModerationSummary> | undefined): ModerationSummary {

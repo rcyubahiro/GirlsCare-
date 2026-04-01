@@ -6,7 +6,7 @@ import InputField from '../components/InputField';
 import { validateEmail, validatePassword } from '../utils/validation';
 
 interface AuthPageProps {
-  onLogin: (email: string) => void;
+  onLogin: (email: string, isAdmin?: boolean) => void;
 }
 
 export default function AuthPage({ onLogin }: AuthPageProps) {
@@ -35,7 +35,8 @@ export default function AuthPage({ onLogin }: AuthPageProps) {
 
     setLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 600));
-    onLogin(email.trim());
+    const isAdmin = email.toLowerCase().includes('admin');
+    onLogin(email.trim(), isAdmin);
     setLoading(false);
     navigate('/dashboard');
   };
@@ -71,6 +72,9 @@ export default function AuthPage({ onLogin }: AuthPageProps) {
             onChange={(event) => setPassword(event.target.value)}
             error={errors.password}
           />
+          <p className="text-xs text-slate-600 dark:text-slate-400">
+            💡 Tip: Use an email containing "admin" for admin panel access.
+          </p>
           <Button fullWidth onClick={handleSubmit} disabled={loading || hasErrors}>
             {loading ? 'Please wait...' : mode === 'login' ? 'Login' : 'Register'}
           </Button>

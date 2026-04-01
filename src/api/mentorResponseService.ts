@@ -1,4 +1,4 @@
-import type { MentorResponse, MentorProfile, ModerationStatus } from '../types';
+ import type { MentorResponse, MentorProfile, ModerationStatus } from '../types';
 
 const mentors: MentorProfile[] = [
   { id: 'm-1', name: 'Claudine M.', role: 'Peer Mentor' },

@@ -2,6 +2,7 @@ export interface UserSession {
   email: string;
   name: string;
   loggedInAt: string;
+  isAdmin?: boolean;
 }
 
 export interface Question {
@@ -73,4 +74,36 @@ export interface QueuedQuestion {
   localId: string;
   content: string;
   queuedAt: string;
+}
+
+export interface CycleSettings {
+  cycleLength: number;
+  periodLength: number;
+  lastPeriodStart: string;
+  remindersEnabled: boolean;
+  reminderTime: string;
+}
+
+export type CyclePhase = 'menstrual' | 'follicular' | 'ovulation' | 'luteal';
+
+export interface Mentor {
+  id: string;
+  name: string;
+  specialty: string;
+  availability: 'Online' | 'Away';
+}
+
+export interface MentorChatMessage {
+  id: string;
+  mentorId: string;
+  sender: 'user' | 'mentor';
+  content: string;
+  createdAt: string;
+  deliveredAt?: string;
+  readAt?: string;
+}
+
+export interface EncryptedMessagePayload {
+  iv: string;
+  cipherText: string;
 }
